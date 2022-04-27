@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\CategoryController;
 
 
 /*
@@ -26,6 +27,13 @@ Route::group(['middleware'=>['auth:api']],function(){
 
     Route::get('/logout',[LoginController::class,'logout'])->name('logout');
     Route::get('/users',[UserController::class,'userList'])->name('user.list');
+
+    Route::controller(CategoryController::class)->group(function(){
+        Route::get('/category/list','categoryList')->name('category.list');
+        Route::post('/catagory/add','categoryAdd')->name('category.add');
+        Route::put('/category/update/{category_id}','categoryUpdate')->name('category.update');
+        Route::get('/category/delete/{category_id}','categoryDelete')->name('category.delete');
+    });
 
 });
 
