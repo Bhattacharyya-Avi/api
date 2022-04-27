@@ -23,6 +23,13 @@ use App\Http\Controllers\Api\CategoryController;
 // });
 
 Route::post('/login',[LoginController::class,'login'])->name('login');
+
+// reset pass
+
+Route::post('/forget/password/email',[LoginController::class,'passwordReset']);
+Route::post('/post/new/password/{token}',[LoginController::class,'newPassword'])->name('new.password');
+
+
 Route::group(['middleware'=>['auth:api']],function(){
 
     Route::get('/logout',[LoginController::class,'logout'])->name('logout');
