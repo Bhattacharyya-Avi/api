@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $cradintials = $request->except('_token');
-        $token = auth('api')->attempt($cradintials);
+        $token = auth()->attempt($cradintials);
         if (!$token) {
             return response()->json(['error'=>'Incorrect Email or pass...!',401]);
         }
